@@ -1,0 +1,47 @@
+name: pizza_delivery
+description: The Pizza delivery application.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.3.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  swipedetector: ^1.2.0
+  provider:
+  flare_flutter:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/toppings/
+    - assets/images/toppings/flare/
+
+  fonts:
+    - family: IntroHeadB
+      fonts:
+        - asset: assets/fonts/IntroHeadB-LBase.otf
+    - family: Impact
+      fonts:
+        - asset: assets/fonts/impact.ttf
+    - family: RozhaOne
+      fonts:
+        - asset: assets/fonts/RozhaOne-Regular.otf
+    - family: ITC Avant Garde Gothic Std
+      fonts:
+        - asset: assets/fonts/medium.otf
+        - asset: assets/fonts/light.otf
+          weight: 300
+        - asset: assets/fonts/ITCAvantGardeStd-Demi.otf
+          weight: 600
+        - asset: assets/fonts/ITCAvantGardeStd-Md.otf
+          weight: 500
