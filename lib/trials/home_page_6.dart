@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
     for (int i = 0; i < _pizzas.length; i++) {
       Widget pizza;
       if (i == _currentIndex) {
-        pizza = _buildPizza(i);
+        pizza = _buildPizza(i, PizzaGeometry.center());
       } else if (i == _currentIndex - 1) {
         //left
         pizza = _buildPizza(i, PizzaGeometry.left());
