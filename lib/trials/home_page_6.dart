@@ -142,8 +142,10 @@ class PizzaGeometry {
   final Offset position;
   final double scale;
 
-  const PizzaGeometry(
-      [this.position = const Offset(0.0, 0.0), this.scale = 1.0]);
+  const PizzaGeometry([
+    this.position = const Offset(0.0, 0.0),
+    this.scale = 1.0,
+  ]);
 
   factory PizzaGeometry.center() {
     return PizzaGeometry(Offset(0.0, 0.0), 1.0);
@@ -160,7 +162,6 @@ class PizzaGeometry {
   factory PizzaGeometry.next() {
     return PizzaGeometry(Offset(310, 250), 0.6);
   }
-
   PizzaGeometry operator -(PizzaGeometry other) {
     return PizzaGeometry(position - other.position, scale - other.scale);
   }
