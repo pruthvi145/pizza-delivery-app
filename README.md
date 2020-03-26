@@ -1,6 +1,6 @@
 # pizza_delivery
 
-A new Flutter project.
+A practice application for complex Iser Interface.
 
 ## Getting Started
 
