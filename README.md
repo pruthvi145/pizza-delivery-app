@@ -2,6 +2,8 @@
 
 A practice application for complex User Interface and Animations.
 
+Original UI inspiration by [JIANGGM](https://dribbble.com/shots/8154883-Pizza-order-system).
+
 ## Previews
 <img src="https://github.com/pruthvi145/pizza-delivery-app/blob/master/screenshots/ss-1.jpg" alt="Screen One" width="200"/>
 <img src="https://github.com/pruthvi145/pizza-delivery-app/blob/master/screenshots/ss-2.jpg" alt="Screen Two" width="200"/>
