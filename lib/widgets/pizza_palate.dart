@@ -8,7 +8,7 @@ import 'package:pizza_delivery/widgets/add_to_cart_button.dart';
 import 'package:pizza_delivery/widgets/custom_radio.dart';
 import 'package:provider/provider.dart';
 
-import '../pizza_detail_page_8_2.dart';
+import '../pizza_details_page.dart';
 import 'home_widgets/pizza_carousel.dart';
 
 List<Pizza> _pizzas = DemoData.pizzas;

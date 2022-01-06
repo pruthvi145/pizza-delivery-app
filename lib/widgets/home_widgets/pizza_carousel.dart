@@ -7,7 +7,7 @@ import 'package:pizza_delivery/helpers/swipe_detector.dart';
 import 'package:pizza_delivery/provider/current_pizza_index_notifier.dart';
 import 'package:provider/provider.dart';
 
-import '../../pizza_detail_page_8_2.dart';
+import '../../pizza_details_page.dart';
 
 class PizzaCarousel extends StatefulWidget {
   final List<Pizza> children;
