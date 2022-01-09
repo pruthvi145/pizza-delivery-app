@@ -1,0 +1,4 @@
+name: Pizza Delivery App
+mode: flutter
+files:
+  - name: main.dart
