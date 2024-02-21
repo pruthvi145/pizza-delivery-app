@@ -11,8 +11,8 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.6
   swipedetector_nullsafety: ^2.0.0
-  provider:
-  flare_flutter:
+  provider: ^6.1.1
+  flare_flutter: ^3.0.2
 
 dev_dependencies:
   flutter_test:
