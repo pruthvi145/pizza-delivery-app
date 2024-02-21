@@ -3,6 +3,8 @@ description: The Pizza delivery application.
 
 version: 1.0.0+1
 
+androidx: true
+
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
