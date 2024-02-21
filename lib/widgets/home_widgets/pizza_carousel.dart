@@ -10,9 +10,9 @@ import 'package:provider/provider.dart';
 import '../../pizza_details_page.dart';
 
 class PizzaCarousel extends StatefulWidget {
-  final List<Pizza> children;
+  final List<Pizza>? children;
   const PizzaCarousel({
-    Key key,
+    Key? key,
     this.children,
   }) : super(key: key);
 
@@ -27,7 +27,7 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
   void _leftSwipeHandler() {
     int _currentIndex =
         Provider.of<CurrentPizzaIndexNotifier>(context).currentIndex;
-    if (!isAnimating && _currentIndex + 1 < widget.children.length) {
+    if (!isAnimating && _currentIndex + 1 < widget.children!.length) {
       setState(() {
         Provider.of<CurrentPizzaIndexNotifier>(context).currentIndex++;
         angle -= pi / 4;
@@ -62,17 +62,17 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
       onEnd: _onAnimationEnd,
       tween: Tween(begin: pizzaGeometry, end: pizzaGeometry),
       duration: Duration(milliseconds: 400),
-      builder: (BuildContext context, PizzaGeometry data, Widget child) {
+      builder: (BuildContext context, PizzaGeometry data, Widget? child) {
         return Transform.translate(
           offset: data.position,
           child: Transform.scale(
             scale: data.scale,
-            child: child,
+            child: child!,
           ),
         );
       },
       child: Image.asset(
-        pizza.image,
+        pizza.image!,
         width: 230,
         fit: BoxFit.fill,
       ),
@@ -81,25 +81,25 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
 
   List<Widget> _buildPizzaList() {
     List<Widget> pizzaList = [];
-    for (int i = 0; i < widget.children.length; i++) {
+    for (int i = 0; i < widget.children!.length; i++) {
       Widget pizza;
       int _currentIndex =
           Provider.of<CurrentPizzaIndexNotifier>(context).currentIndex;
 
       if (i == _currentIndex) {
-        pizza = _buildPizza(widget.children[i]);
+        pizza = _buildPizza(widget.children![i]);
       } else if (i == _currentIndex - 1) {
         //left
-        pizza = _buildPizza(widget.children[i], PizzaGeometry.left());
+        pizza = _buildPizza(widget.children![i], PizzaGeometry.left());
       } else if (i == _currentIndex + 1) {
         //right
-        pizza = _buildPizza(widget.children[i], PizzaGeometry.right());
+        pizza = _buildPizza(widget.children![i], PizzaGeometry.right());
       } else if (i < _currentIndex) {
         //prev
-        pizza = _buildPizza(widget.children[i], PizzaGeometry.prev());
+        pizza = _buildPizza(widget.children![i], PizzaGeometry.prev());
       } else {
         //next
-        pizza = _buildPizza(widget.children[i], PizzaGeometry.next());
+        pizza = _buildPizza(widget.children![i], PizzaGeometry.next());
       }
       pizzaList.add(pizza);
     }
@@ -114,10 +114,10 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
         TweenAnimationBuilder(
           duration: Duration(milliseconds: 400),
           tween: Tween<double>(begin: 0.0, end: angle),
-          builder: (BuildContext context, double angle, Widget child) {
+          builder: (BuildContext context, double angle, Widget? child) {
             return Transform.rotate(
               angle: angle,
-              child: child,
+              child: child!,
             );
           },
           child: Image.asset(
@@ -146,7 +146,7 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => PizzaDetailPage(
-                      widget.children[_currentIndex],
+                      widget.children![_currentIndex],
                     ),
                   ),
                 );

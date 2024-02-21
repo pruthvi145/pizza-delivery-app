@@ -59,24 +59,24 @@ class HomePizzaDetails extends StatefulWidget {
 
 class _HomePizzaDetailsState extends State<HomePizzaDetails>
     with SingleTickerProviderStateMixin {
-  AnimationController _anim;
+  AnimationController? _anim;
 
-  int _oldIndex;
+  int? _oldIndex;
   @override
   void initState() {
     _anim = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
-    _anim.addListener(() => setState(() {}));
+    _anim!.addListener(() => setState(() {}));
     super.initState();
   }
 
   Widget buildPizzaName(BuildContext context, String name) {
     return Transform.translate(
-      offset: Offset(0, 5 * -_anim.value),
+      offset: Offset(0, 5 * -_anim!.value),
       child: Opacity(
-        opacity: _anim.value,
+        opacity: _anim!.value,
         child: Text(
           name,
           style: TextStyle(
@@ -91,9 +91,9 @@ class _HomePizzaDetailsState extends State<HomePizzaDetails>
 
   Widget buildPizzaPrice(BuildContext context, double price) {
     return Transform.translate(
-      offset: Offset(0, 5 * -_anim.value),
+      offset: Offset(0, 5 * -_anim!.value),
       child: Opacity(
-        opacity: _anim.value,
+        opacity: _anim!.value,
         child: Text(
           "\$$price",
           style: TextStyle(
@@ -114,7 +114,7 @@ class _HomePizzaDetailsState extends State<HomePizzaDetails>
           : Icon(Icons.star_border, color: Color(0xFFcb6b3e), size: 16),
     );
     return Opacity(
-      opacity: _anim.value,
+      opacity: _anim!.value,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: startIcons,
@@ -127,13 +127,13 @@ class _HomePizzaDetailsState extends State<HomePizzaDetails>
     int _currentIndex =
         Provider.of<CurrentPizzaIndexNotifier>(context).currentIndex;
     if (_oldIndex != _currentIndex) {
-      _anim.forward(from: 0);
+      _anim!.forward(from: 0);
     }
     _oldIndex = _currentIndex;
     Pizza pizza = _pizzas[_currentIndex];
     return Column(
       children: <Widget>[
-        buildPizzaName(context, pizza.name),
+        buildPizzaName(context, pizza.name!),
         buildPizzaRatings(pizza.rating),
         buildPizzaPrice(context, pizza.getTotal()),
         CustomRadio(),

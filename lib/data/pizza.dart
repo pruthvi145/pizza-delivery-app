@@ -1,10 +1,10 @@
 import 'package:pizza_delivery/data/topping.dart';
 
 class Pizza {
-  final String name;
-  final double price;
+  final String? name;
+  final double? price;
   final int rating;
-  final String image;
+  final String? image;
   Set<Topping> toppings;
 
   Pizza({
@@ -23,9 +23,9 @@ class Pizza {
   double getTotal() {
     double toppingPrice = 0.0;
     toppings.forEach((topping) {
-      toppingPrice += topping.price;
+      toppingPrice += topping.price!;
     });
-    return price + toppingPrice;
+    return price! + toppingPrice;
   }
 
   void resetToppings() {

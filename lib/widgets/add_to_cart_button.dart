@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pizza_delivery/helpers/styles.dart';
 
 class AddToCartButton extends StatelessWidget {
-  final Function onTap;
+  final Function? onTap;
 
-  const AddToCartButton({Key key, this.onTap}) : super(key: key);
+  const AddToCartButton({Key? key, this.onTap}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: onTap as void Function()?,
       child: Container(
         decoration: BoxDecoration(
           gradient: Styles.addToCartButtonGradient,

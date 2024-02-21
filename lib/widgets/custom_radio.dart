@@ -30,11 +30,11 @@ class _CustomRadioState extends State<CustomRadio> {
 }
 
 class RadioItem extends StatelessWidget {
-  final String text;
+  final String? text;
   final bool isSelected;
-  final Function onTap;
+  final Function? onTap;
 
-  const RadioItem({Key key, this.text, this.isSelected = false, this.onTap})
+  const RadioItem({Key? key, this.text, this.isSelected = false, this.onTap})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class RadioItem extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 5),
             alignment: Alignment.center,
             child: Text(
-              text,
+              text!,
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w500,
@@ -70,7 +70,7 @@ class RadioItem extends StatelessWidget {
             alignment: Alignment.center,
             // color: Colors.red,
             child: Text(
-              text,
+              text!,
               style: TextStyle(
                 color: Color(0xFF522a21),
               ),
@@ -78,7 +78,7 @@ class RadioItem extends StatelessWidget {
           );
     return InkWell(
       child: child,
-      onTap: onTap,
+      onTap: onTap as void Function()?,
       splashColor: Colors.red,
     );
   }

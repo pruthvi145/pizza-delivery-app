@@ -55,7 +55,7 @@ class HomeHeader extends StatelessWidget {
         Container(
           alignment: Alignment.topLeft,
           child: Text(
-            pizza.name,
+            pizza.name!,
             style: TextStyle(
               fontFamily: 'IntroHeadB',
               fontSize: 33,
@@ -84,24 +84,24 @@ class _PizzaPalateState extends State<PizzaPalate>
     with SingleTickerProviderStateMixin {
   Set<Topping> addedToppings = {};
   List<Topping> _avalibleToppings = [];
-  AnimationController _animationController;
-  Animation _scaleAnim;
+  AnimationController? _animationController;
+  Animation? _scaleAnim;
 
   @override
   void initState() {
     _avalibleToppings = DemoData.toppings;
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    _animationController.addListener(() {
+    _animationController!.addListener(() {
       setState(() {});
     });
-    _scaleAnim = Tween(begin: 1.0, end: 1.1).animate(_animationController);
+    _scaleAnim = Tween(begin: 1.0, end: 1.1).animate(_animationController!);
     super.initState();
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
   }
 
@@ -134,7 +134,7 @@ class _PizzaPalateState extends State<PizzaPalate>
           alignment: Alignment.center,
           children: <Widget>[
             Transform.scale(
-              scale: _scaleAnim.value,
+              scale: _scaleAnim!.value,
               child: Stack(
                 alignment: Alignment.center,
                 children: <Widget>[
@@ -143,7 +143,7 @@ class _PizzaPalateState extends State<PizzaPalate>
                     width: 260,
                   ),
                   Image.asset(
-                    widget.pizza.image,
+                    widget.pizza.image!,
                     width: 230,
                     fit: BoxFit.fill,
                   ),
@@ -165,15 +165,15 @@ class _PizzaPalateState extends State<PizzaPalate>
               color: Colors.transparent,
               child: DragTarget<Topping>(
                 onWillAccept: (_) {
-                  _animationController.forward();
+                  _animationController?.forward();
                   return true;
                 },
                 onAccept: (Topping topping) {
                   addTopping(topping);
-                  _animationController.reverse();
+                  _animationController?.reverse();
                 },
                 onLeave: (_) {
-                  _animationController.reverse();
+                  _animationController?.reverse();
                 },
                 builder: (context, data, antherdata) {
                   // print(data);
@@ -209,11 +209,11 @@ class _PizzaPalateState extends State<PizzaPalate>
 }
 
 class HomePizzaDetails extends StatefulWidget {
-  final Pizza pizza;
-  final List<Topping> avalibleToppings;
-  final Function onDragStarted;
+  final Pizza? pizza;
+  final List<Topping>? avalibleToppings;
+  final Function? onDragStarted;
   const HomePizzaDetails(
-      {Key key, this.pizza, this.avalibleToppings, this.onDragStarted})
+      {Key? key, this.pizza, this.avalibleToppings, this.onDragStarted})
       : super(key: key);
 
   @override
@@ -222,24 +222,24 @@ class HomePizzaDetails extends StatefulWidget {
 
 class _HomePizzaDetailsState extends State<HomePizzaDetails>
     with SingleTickerProviderStateMixin {
-  AnimationController _anim;
+  AnimationController? _anim;
 
-  double _oldPrice;
+  double? _oldPrice;
   @override
   void initState() {
     _anim = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
-    _anim.addListener(() => setState(() {}));
+    _anim!.addListener(() => setState(() {}));
     super.initState();
   }
 
   Widget buildPizzaPrice(BuildContext context, double price) {
     return Transform.translate(
-      offset: Offset(0, 5 * -_anim.value),
+      offset: Offset(0, 5 * -_anim!.value),
       child: Opacity(
-        opacity: _anim.value,
+        opacity: _anim!.value,
         child: Text(
           "\$$price",
           style: TextStyle(
@@ -254,9 +254,9 @@ class _HomePizzaDetailsState extends State<HomePizzaDetails>
 
   @override
   Widget build(BuildContext context) {
-    double price = widget.pizza.getTotal();
+    double price = widget.pizza!.getTotal();
     if (_oldPrice != price) {
-      _anim.forward(from: 0);
+      _anim!.forward(from: 0);
     }
     _oldPrice = price;
     return Column(
@@ -269,13 +269,13 @@ class _HomePizzaDetailsState extends State<HomePizzaDetails>
         Container(
           height: 60,
           child: ListView.builder(
-            itemCount: widget.avalibleToppings.length,
+            itemCount: widget.avalibleToppings!.length,
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               return BuildTopping(
-                toppingData: widget.avalibleToppings[index],
-                onDragStarted: widget.onDragStarted,
+                toppingData: widget.avalibleToppings![index],
+                onDragStarted: widget.onDragStarted!,
               );
             },
           ),
@@ -296,16 +296,16 @@ class _HomePizzaDetailsState extends State<HomePizzaDetails>
 }
 
 class BuildTopping extends StatelessWidget {
-  final Widget image;
-  final Topping toppingData;
-  final Function onDragStarted;
+  final Widget? image;
+  final Topping? toppingData;
+  final Function? onDragStarted;
 
   BuildTopping({this.onDragStarted, this.image, this.toppingData});
 
   @override
   Widget build(BuildContext context) {
     Widget toppingImage = Image.asset(
-      toppingData.thumbImage,
+      toppingData!.thumbImage!,
       width: 45,
     );
     return Container(
@@ -324,14 +324,14 @@ class BuildTopping extends StatelessWidget {
         ignoringFeedbackSemantics: false,
         maxSimultaneousDrags: 1,
         data: toppingData,
-        onDragStarted: onDragStarted,
+        onDragStarted: onDragStarted as void Function(),
       ),
     );
   }
 }
 
 class ToppingOnPizza extends StatelessWidget {
-  final Topping toppingData;
+  final Topping? toppingData;
   final bool shouldAnimate;
 
   const ToppingOnPizza({this.shouldAnimate = false, this.toppingData});
@@ -343,9 +343,9 @@ class ToppingOnPizza extends StatelessWidget {
       width: double.infinity,
       color: Colors.transparent,
       child: FlareActor(
-        toppingData.flareAsset,
+        toppingData!.flareAsset,
         animation: shouldAnimate ? "regular" : "idle",
-        artboard: toppingData.flareArtboard,
+        artboard: toppingData!.flareArtboard,
         // color: Colors.white,
       ),
     );
