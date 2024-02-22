@@ -88,7 +88,7 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
     for (int i = 0; i < widget.children!.length; i++) {
       Widget pizza;
       int _currentIndex =
-          Provider.of<CurrentPizzaIndexNotifier>(context, listen: true)
+          Provider.of<CurrentPizzaIndexNotifier>(context, listen: false)
               .currentIndex;
 
       if (i == _currentIndex) {
