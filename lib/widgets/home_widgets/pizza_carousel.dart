@@ -26,10 +26,12 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
 
   void _leftSwipeHandler() {
     int _currentIndex =
-        Provider.of<CurrentPizzaIndexNotifier>(context).currentIndex;
+        Provider.of<CurrentPizzaIndexNotifier>(context, listen: false)
+            .currentIndex;
     if (!isAnimating && _currentIndex + 1 < widget.children!.length) {
       setState(() {
-        Provider.of<CurrentPizzaIndexNotifier>(context).currentIndex++;
+        Provider.of<CurrentPizzaIndexNotifier>(context, listen: false)
+            .currentIndex++;
         angle -= pi / 4;
         isAnimating = true;
       });
@@ -38,11 +40,13 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
 
   void _rightSwipeHandler() {
     int _currentIndex =
-        Provider.of<CurrentPizzaIndexNotifier>(context).currentIndex;
+        Provider.of<CurrentPizzaIndexNotifier>(context, listen: false)
+            .currentIndex;
 
     if (!isAnimating && _currentIndex - 1 >= 0) {
       setState(() {
-        Provider.of<CurrentPizzaIndexNotifier>(context).currentIndex--;
+        Provider.of<CurrentPizzaIndexNotifier>(context, listen: false)
+            .currentIndex--;
         angle += pi / 4;
         isAnimating = true;
       });
@@ -50,7 +54,7 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
   }
 
   void _onAnimationEnd() {
-    isAnimating = false;
+    isAnimating = true;
   }
 
   Widget _buildPizza(
@@ -84,7 +88,8 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
     for (int i = 0; i < widget.children!.length; i++) {
       Widget pizza;
       int _currentIndex =
-          Provider.of<CurrentPizzaIndexNotifier>(context).currentIndex;
+          Provider.of<CurrentPizzaIndexNotifier>(context, listen: true)
+              .currentIndex;
 
       if (i == _currentIndex) {
         pizza = _buildPizza(widget.children![i]);
@@ -139,9 +144,10 @@ class _PizzaCarouselState extends State<PizzaCarousel> {
             opacity: 0,
             child: InkWell(
               onTap: () {
-                int _currentIndex =
-                    Provider.of<CurrentPizzaIndexNotifier>(context)
-                        .currentIndex;
+                int _currentIndex = Provider.of<CurrentPizzaIndexNotifier>(
+                        context,
+                        listen: false)
+                    .currentIndex;
                 Navigator.push(
                   context,
                   MaterialPageRoute(

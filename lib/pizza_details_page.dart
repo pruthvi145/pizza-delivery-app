@@ -21,14 +21,17 @@ class PizzaDetailPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           constraints: BoxConstraints(minHeight: h),
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 45),
           decoration: BoxDecoration(gradient: Styles.backgroundGradient),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              SizedBox(height: 20),
               HomeHeader(pizza),
               SizedBox(height: 20),
-              PizzaPalate(pizza),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 45),
+                child: PizzaPalate(pizza),
+              ),
             ],
           ),
         ),
@@ -52,21 +55,21 @@ class HomeHeader extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        Container(
-          alignment: Alignment.topLeft,
-          child: Text(
-            pizza.name!,
-            style: TextStyle(
-              fontFamily: 'IntroHeadB',
-              fontSize: 33,
-              color: Theme.of(context).primaryColor,
+        Expanded(
+          child: Container(
+            alignment: Alignment.topLeft,
+            child: Text(
+              pizza.name!,
+              style: TextStyle(
+                fontFamily: 'IntroHeadB',
+                fontSize: 33,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ),
         ),
         IconButton(
-          onPressed: () {},
-          icon: Image.asset('assets/images/cart.png'),
-        ),
+            onPressed: () {}, icon: Image.asset('assets/images/cart.png')),
       ],
     );
   }
@@ -106,7 +109,7 @@ class _PizzaPalateState extends State<PizzaPalate>
   }
 
   void onDragStarted() {
-    // _animationController2.reset();
+    _animationController!.reset();
   }
 
   void addTopping(Topping topping) {
@@ -150,7 +153,7 @@ class _PizzaPalateState extends State<PizzaPalate>
                 ],
               ),
             ),
-            if (widget.pizza.toppings != null) ...{
+            ...{
               ...widget.pizza.toppings.map((tooping) {
                 return ToppingOnPizza(
                   toppingData: tooping,
@@ -164,12 +167,12 @@ class _PizzaPalateState extends State<PizzaPalate>
               width: 250,
               color: Colors.transparent,
               child: DragTarget<Topping>(
-                onWillAccept: (_) {
+                onWillAcceptWithDetails: (_) {
                   _animationController?.forward();
                   return true;
                 },
-                onAccept: (Topping topping) {
-                  addTopping(topping);
+                onAcceptWithDetails: (DragTargetDetails<Topping> details) {
+                  addTopping(details.data);
                   _animationController?.reverse();
                 },
                 onLeave: (_) {

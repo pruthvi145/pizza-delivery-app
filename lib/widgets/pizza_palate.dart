@@ -125,7 +125,8 @@ class _HomePizzaDetailsState extends State<HomePizzaDetails>
   @override
   Widget build(BuildContext context) {
     int _currentIndex =
-        Provider.of<CurrentPizzaIndexNotifier>(context).currentIndex;
+        Provider.of<CurrentPizzaIndexNotifier>(context, listen: false)
+            .currentIndex;
     if (_oldIndex != _currentIndex) {
       _anim!.forward(from: 0);
     }
