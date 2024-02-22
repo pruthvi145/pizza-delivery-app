@@ -109,7 +109,7 @@ class _PizzaPalateState extends State<PizzaPalate>
   }
 
   void onDragStarted() {
-    _animationController!.reset();
+    // _animationController!.reset();
   }
 
   void addTopping(Topping topping) {
@@ -167,12 +167,12 @@ class _PizzaPalateState extends State<PizzaPalate>
               width: 250,
               color: Colors.transparent,
               child: DragTarget<Topping>(
-                onWillAcceptWithDetails: (_) {
+                onWillAccept: (_) {
                   _animationController?.forward();
                   return true;
                 },
-                onAcceptWithDetails: (DragTargetDetails<Topping> details) {
-                  addTopping(details.data);
+                onAccept: (Topping topping) {
+                  addTopping(topping);
                   _animationController?.reverse();
                 },
                 onLeave: (_) {
